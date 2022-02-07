@@ -1,0 +1,62 @@
+"Software is eating the world". Marc Andreessen
+"All companies are software companies" - Satya Nadella
+
+The best competitive advantage you can give your business is to ship code faster.
+
+How to make sure any team in my org can ship their app to production in 5 minutes?
+
+Give them self servicing systems, in other words, a PaaS.
+
+Let's shop the shelf for PaaS systems.
+
+Heroku, Platform.sh etc.<more logos>
+
+Easy to get started.
+Expensive in the long run.
+Not customizable beyond a degree.
+More expensive to run on your premises.
+
+Build your own.
+
+The majority of people managing infrastructure just want a PaaS.
+The only requirement: Is has to be built by them.
+- Kelsey Hightower
+
+Kubernetes isn't rocket science, but close to that. Has a steep learning curve.
+Running and maintaining Kubernetes(aka Day 2 operations) is hard in the long run.
+
+Enter Shapeblock.
+Gives you the best of both worlds.
+
+Sits as an invisible layer between you and your Kubernetes cluster.
+
+Deploy any stack <logos>
+PHP, Java, Python, Ruby, Node.js, mariadb, mongodb, elastic    
+
+Works with all major Kubernetes providers <logos>
+EKS, AKS, DOKS, GKE, LKE with more on the way.
+
+Plays nice with existing systems <logos>    
+Github, Jenkins, Gitlab, Bitbucket, slack, Zapier    
+
+Why shapeblock?
+
+1. best practices baked in
+2. scale your apps and monitor them
+3. take periodic backups and restore to the last working version on demand
+4. give granular user access to different apps
+5. best part, your devs needn't know anything about kubernetes.
+
+Offerings
+
+3 types of offerings:
+
+1. 49 USD/month or 499 USD/year - 1 cluster unlimited applications and projects. good fit for small agencies and early stage startups. next business day email support.
+2. 99 USD/month or 999 USD/year - unlimited clusters and applications. teams feature. autoscaling. good fit for mid size agencies. next business day email support.
+3. 999 USD/month or 9999 USD/year - runs in your premises, can be tailored to run your custom auth, your own user authentication, whitelabelling. suitable for enterprises and medium to large agencies. 8 hours email support. ticketing system with on-call over the shoulders support.
+
+Referral system
+
+Any of the plans above can be tied into a referral system with upto 30% referral fee.
+
+Try shapeblock now.

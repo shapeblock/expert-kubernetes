@@ -1,5 +1,6 @@
 module "eks_cluster" {
   source          = "terraform-aws-modules/eks/aws"
+  version         = "17.24.0"
   cluster_name    = var.cluster_name
   cluster_version = var.cluster_version
   subnets         = module.vpc.private_subnets
@@ -12,6 +13,7 @@ module "eks_cluster" {
 
   tags = {
     Environment = "develop"
+    Project = "expert-kubernetes"
   }
 
   worker_groups = [
@@ -34,4 +36,12 @@ module "eks_cluster" {
       ]
     }
   ]
+}
+
+data "aws_eks_cluster" "cluster" {
+  name = module.eks_cluster.cluster_id
+}
+
+data "aws_eks_cluster_auth" "cluster" {
+  name = module.eks_cluster.cluster_id
 }
