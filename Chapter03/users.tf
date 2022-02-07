@@ -34,6 +34,13 @@ resource "aws_iam_user_policy_attachment" "cluster_access" {
 }
 
 // add users and attach them to groups for project x 
+
+// kiran to project-x 
+
+resource "aws_iam_user" "kiran" {
+  name = "kiran"
+}
+
 resource "aws_iam_user_group_membership" "kiran" {
   user = aws_iam_user.kiran.name
 
@@ -42,14 +49,28 @@ resource "aws_iam_user_group_membership" "kiran" {
   ]
 }
 
-resource "aws_iam_user" "kiran" {
-  name = "kiran"
-}
-
+// for users to configure kubeconfig via cli
 resource "aws_iam_user_policy_attachment" "cluster_access_kiran" {
   user       = aws_iam_user.kiran.name
   policy_arn = aws_iam_policy.eks_policy.arn
 }
 
+// aditi to project-x
+resource "aws_iam_user" "aditi" {
+  name = "aditi"
+}
+
+resource "aws_iam_user_group_membership" "aditi" {
+  user = aws_iam_user.aditi.name
+
+  groups = [
+    aws_iam_group.project_x.name,
+  ]
+}
+
+resource "aws_iam_user_policy_attachment" "cluster_access_aditi" {
+  user       = aws_iam_user.aditi.name
+  policy_arn = aws_iam_policy.eks_policy.arn
+}
 
 // ... and project y

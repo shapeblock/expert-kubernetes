@@ -26,7 +26,7 @@ resource "kubernetes_role" "developer" {
 
 resource "kubernetes_role_binding" "kiran" {
   metadata {
-    name      = "developer"
+    name      = "kiran"
     namespace = "project-x"
   }
   role_ref {
@@ -37,6 +37,23 @@ resource "kubernetes_role_binding" "kiran" {
   subject {
     kind      = "User"
     name      = "kiran"
+    api_group = "rbac.authorization.k8s.io"
+  }
+}
+
+resource "kubernetes_role_binding" "aditi" {
+  metadata {
+    name      = "aditi"
+    namespace = "project-x"
+  }
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "Role"
+    name      = "developer"
+  }
+  subject {
+    kind      = "User"
+    name      = "aditi"
     api_group = "rbac.authorization.k8s.io"
   }
 }

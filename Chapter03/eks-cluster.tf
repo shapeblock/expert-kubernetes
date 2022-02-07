@@ -40,6 +40,14 @@ module "eks" {
       groups   = ["system:bootstrappers", "system:nodes"]
     },
   ]
+  map_users = [
+    {
+      userarn  = aws_iam_user.aditi.arn
+      username = "aditi"
+      groups   = ["system:bootstrappers", "system:nodes"]
+    },
+  ]
+
 }
 
 data "aws_eks_cluster" "cluster" {
