@@ -4,8 +4,5 @@ variable "aws_region" {
   type        = string
 }
 
-variable "cluster_name" {
-  default     = "aws-dev"
-  description = "Name of the Kubernetes cluster."
-  type        = string
+variable "email" {
 }

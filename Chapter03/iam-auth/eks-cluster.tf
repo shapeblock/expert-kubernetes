@@ -26,25 +26,31 @@ module "eks" {
       additional_security_group_ids = [aws_security_group.worker_group_mgmt_two.id]
       asg_desired_capacity          = 1
     },
+    {
+      name                          = "worker-group-3"
+      instance_type                 = "t3.large"
+      additional_security_group_ids = [aws_security_group.worker_group_mgmt_two.id]
+      asg_desired_capacity          = 2
+    },
   ]
 
   map_roles = [
     {
       rolearn  = aws_iam_role.cluster_admin.arn
-      username = "admin"
+      username = "lakshmi"
       groups   = ["system:masters"]
     },
     {
       rolearn  = aws_iam_role.project_x.arn
       username = "kiran"
-      groups   = ["system:bootstrappers", "system:nodes"]
+      groups   = [""]
     },
   ]
   map_users = [
     {
       userarn  = aws_iam_user.aditi.arn
       username = "aditi"
-      groups   = ["system:bootstrappers", "system:nodes"]
+      groups   = [""]
     },
   ]
 

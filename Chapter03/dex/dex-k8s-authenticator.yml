@@ -1,0 +1,44 @@
+config:
+  clusters:
+    - name: education-eks-y5OrtiJx
+      short_description: "Production kubernetes"
+      description: "Production kubernetes"
+      issuer: https://dex.prod-cluster.shapeblock.xyz
+      client_id: production-kubernetes
+      client_secret: 9d5a84e5-3b9c-43e7-a538-d86de1e55d1c
+      redirect_uri: https://login.prod-cluster.shapeblock.xyz/callback
+      k8s_master_uri: https://24095B7A7F6FEBA66499C2698F447E38.gr7.ap-south-1.eks.amazonaws.com
+      k8s_ca_pem: |
+        -----BEGIN CERTIFICATE-----
+        MIIC5zCCAc+gAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl
+        cm5ldGVzMB4XDTIyMDMwMTEyNTg0MFoXDTMyMDIyNzEyNTg0MFowFTETMBEGA1UE
+        AxMKa3ViZXJuZXRlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMgc
+        8e/MylmxBOiUC3VkP181CjxyowRHiT5GGcpECFrMJKhFQOLeTBpzDLSijdNWvmal
+        vRfhoo5EaLC3ZdGFcLK7a0OWHFTX2RsPd4Ne1Ra+vYqk9o4FfORA4TdJsv1tC070
+        tigEbKAFfPPaSti0ny/cVL53JwikGsT3CQAY5i1xglh465Ou61MxKRJbdGRrlQhM
+        1xH2s7JByGLyRh/2BrwAxJaRFoZUeU9J6GfPzY/u1NDn3k6NOeYNnOxNIjCyhu2A
+        8WvVvgOSCywrU2gMzJOOFERMFSq3f57PJXbptMBffHJsDlkqQkqhlGCHddhD7xKx
+        xwuo46HoR/U51BWM4O8CAwEAAaNCMEAwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB
+        /wQFMAMBAf8wHQYDVR0OBBYEFO+Kr5rd2U8gxWyYl/EjLouzUI4gMA0GCSqGSIb3
+        DQEBCwUAA4IBAQABlzNkO+Qled197YDXegJgpIpTSBwIgUgjgiM00W51p/WsNsCW
+        8ebv8Cao/AzF3KNtGWOU2bjFTczqeWBNs4KJOIcp9OR0cUjhFVytlFTGojFHGYN+
+        HhwT7bzQ1gFHXWwZKJXQB7DNU/Xx4uQ+F3LJDjJSJiJkupNuVU4yRRaN6va9Qsqq
+        KFPan4ABOzDDWJDmGRlGlHGcXEhwMH7AVOXembeuChLPg5oYk+RcYhMunwgYjRCZ
+        4qJm+tmogWKcN2SjgCng4567nhGB84UTqCMjAbVQlYrbOqtWC3aXCeKg6NHEvA88
+        T3x/wW+FpzNoI9xXijHgAQWAGxsEVgzUUDit
+        -----END CERTIFICATE-----
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    kubernetes.io/tls-acme: "true"
+    cert-manager.io/cluster-issuer: acme
+  hosts:
+    - host: login.prod-cluster.shapeblock.xyz
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - secretName: dex-k8s-authenticator-tls
+      hosts:
+        - login.prod-cluster.shapeblock.xyz

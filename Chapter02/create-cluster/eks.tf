@@ -13,14 +13,16 @@ module "eks_cluster" {
 
   tags = {
     Environment = "develop"
-    Project = "expert-kubernetes"
+    Project     = "expert-kubernetes"
   }
 
   worker_groups = [
     {
-      name                          = "worker-group-2"
+      name                          = "worker-group-1"
       instance_type                 = var.instance_type
-      asg_max_size                  = 2
+      asg_min_size                  = 1
+      asg_desired_capacity          = 2
+      asg_max_size                  = 3
       additional_security_group_ids = [aws_security_group.worker_group_1.id]
       tags = [
         {

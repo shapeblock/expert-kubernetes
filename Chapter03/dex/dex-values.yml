@@ -1,0 +1,70 @@
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    kubernetes.io/tls-acme: "true"
+    cert-manager.io/cluster-issuer: acme
+  hosts:
+    - host: dex.prod-cluster.shapeblock.xyz
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - secretName: dex-tls
+      hosts:
+        - dex.prod-cluster.shapeblock.xyz
+
+https:
+  enabled: false
+volumeMounts:
+- mountPath: /etc/dex/google
+  name: google-sa
+volumes:
+- name: google-sa
+  secret:
+    secretName: google-sa
+
+config:
+  issuer: https://dex.prod-cluster.shapeblock.xyz
+
+  storage:
+    type: kubernetes
+    config:
+      inCluster: true
+
+  oauth2:
+    responseTypes: ["code", "token", "id_token"]
+    skipApprovalScreen: true
+
+  connectors:
+    - type: github
+      id: github
+      name: GitHub
+      config:
+        clientID: "{{ .Env.GITHUB_CLIENT_ID }}"
+        clientSecret: "{{ .Env.GITHUB_CLIENT_SECRET }}"
+        redirectURI: https://dex.prod-cluster.shapeblock.xyz/callback
+        orgs:
+          - name: shapeblock
+    - type: google
+      id: google
+      name: Google
+      config:
+        clientID: "{{ .Env.GOOGLE_CLIENT_ID }}"
+        clientSecret: "{{ .Env.GOOGLE_CLIENT_SECRET }}"
+        redirectURI: https://dex.prod-cluster.shapeblock.xyz/callback
+      hostedDomains:
+        - shapeblock.com
+      serviceAccountFilePath: /etc/dex/google/sa.json
+  staticClients:
+    - id: production-kubernetes
+      secret: 9d5a84e5-3b9c-43e7-a538-d86de1e55d1c
+      name: "education-eks-y5OrtiJx"
+      redirectURIs:
+        - https://login.prod-cluster.shapeblock.xyz/callback
+# Note: this will inject the environment variables directly to the pods.# In a production environment you should mount these keys from a secret using envFrom.# See https://artifacthub.io/packages/helm/dex/dex#values
+env:
+  GOOGLE_CLIENT_ID: "246572538173-3qgu7d7efl884kc4o14t6d0f8g5oo4ja.apps.googleusercontent.com"
+  GOOGLE_CLIENT_SECRET: "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"
+  GITHUB_CLIENT_ID: "ce1a3e3807915026c68c"
+  GITHUB_CLIENT_SECRET: "d38f6d57a742648d5432cade845fd67945f837e2"  

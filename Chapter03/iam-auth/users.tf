@@ -16,16 +16,16 @@ resource "aws_iam_policy" "eks_policy" {
   })
 }
 
+resource "aws_iam_user" "lakshmi" {
+  name = "lakshmi"
+}
+
 resource "aws_iam_user_group_membership" "lakshmi" {
   user = aws_iam_user.lakshmi.name
 
   groups = [
     aws_iam_group.cluster_administrators.name,
   ]
-}
-
-resource "aws_iam_user" "lakshmi" {
-  name = "lakshmi"
 }
 
 resource "aws_iam_user_policy_attachment" "cluster_access" {
