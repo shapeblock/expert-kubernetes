@@ -1,3 +1,11 @@
+locals {
+  ebs_block_device = {
+    block_device_name = "/dev/sdc",
+    volume_type       = "gp2"
+    volume_size       = "20"
+  }
+}
+
 module "eks_cluster" {
   source          = "terraform-aws-modules/eks/aws"
   version         = "17.24.0"
@@ -21,9 +29,11 @@ module "eks_cluster" {
       name                          = "worker-group-1"
       instance_type                 = var.instance_type
       asg_min_size                  = 1
-      asg_desired_capacity          = 2
-      asg_max_size                  = 3
+      asg_desired_capacity          = 3
+      asg_max_size                  = 5
       additional_security_group_ids = [aws_security_group.worker_group_1.id]
+      additional_ebs_volumes        = [local.ebs_block_device]
+      ami_id                        = "ami-01dd164a4205e1ba4"
       tags = [
         {
           "key"                 = "k8s.io/cluster-autoscaler/enabled"

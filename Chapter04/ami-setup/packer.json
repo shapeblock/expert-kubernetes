@@ -1,0 +1,39 @@
+{
+  "variables": {
+    "instance_size": "t3.micro",
+    "ami_name": "expert-kubernetes-ubuntu-ami",
+    "base_ami": "",
+    "ssh_username": "ubuntu",
+    "vpc_id": "",
+    "subnet_id": "",
+    "region": ""
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "{{user `region`}}",
+      "source_ami": "{{user `base_ami`}}",
+      "instance_type": "{{user `instance_size`}}",
+      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_timeout": "5m",
+      "ami_name": "{{user `ami_name`}}",
+      "ssh_pty": "true",
+      "vpc_id": "{{user `vpc_id`}}",
+      "subnet_id": "{{user `subnet_id`}}",
+      "tags": {
+        "Environment": "Production",
+        "Production": "expert-kubernetes"
+      }
+    }
+  ],
+  "description": "AWS image",
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo apt update -y",
+        "sudo apt install -y nfs-common"
+      ]
+    }
+  ]
+}
