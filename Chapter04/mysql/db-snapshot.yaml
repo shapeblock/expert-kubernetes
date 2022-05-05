@@ -1,0 +1,8 @@
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshot
+metadata:
+  name: client-db-snapshot  
+spec:
+  volumeSnapshotClassName: csi-cstor-snapshotclass
+  source:
+    persistentVolumeClaimName: data-client-db-mysql-0

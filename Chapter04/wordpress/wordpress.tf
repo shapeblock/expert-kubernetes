@@ -47,7 +47,19 @@ resource "helm_release" "wordpress" {
     value = "cstor-csi-disk"
   }
   set {
+    name  = "mariadb.primary.persistence.size"
+    value = "2Gi"
+  }
+  set {
     name  = "volumePermissions.enabled"
     value = true
+  }
+  set {
+    name  = "persistence.size"
+    value = "2Gi"
+  }
+  set {
+    name  = "replicaCount"
+    value = 2
   }
 }
