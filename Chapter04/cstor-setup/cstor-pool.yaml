@@ -10,6 +10,7 @@ spec:
      dataRaidGroups:
        - blockDevices:
            - blockDeviceName: "blockdevice-3e6e4c7225ebd4731fba489df0fb6951"
+           - blockDeviceName: "blockdevice-4246f0c6f777c64662f84eaa0c8b5e54" # <--- new device
      poolConfig:
        dataRaidGroupType: "stripe"
 
@@ -18,6 +19,7 @@ spec:
      dataRaidGroups:
        - blockDevices:
            - blockDeviceName: "blockdevice-b3bca44c84ab42231f4eb3619229a054"
+           - blockDeviceName: "blockdevice-56ee0b0b01b9924728cb94fe93de7b8c" # <--- new device
      poolConfig:
        dataRaidGroupType: "stripe"
 
@@ -26,5 +28,6 @@ spec:
      dataRaidGroups:
        - blockDevices:
            - blockDeviceName: "blockdevice-d314e04bd1d211bc8972dfb6b0a56fe7"
+           - blockDeviceName: "blockdevice-2f301c0da5cb16eefdbc47f638ace4aa" # <--- new device
      poolConfig:
        dataRaidGroupType: "stripe"
