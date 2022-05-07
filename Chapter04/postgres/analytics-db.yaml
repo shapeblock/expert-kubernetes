@@ -1,0 +1,14 @@
+apiVersion: stackgres.io/v1
+kind: SGCluster
+metadata:
+  name: analytics-db
+spec:
+  postgres:
+    version: 'latest'
+  instances: 2
+  pods:
+    persistentVolume:
+      size: '90Gi'
+      storageClass: 'analytics-db'
+  prometheusAutobind: false
+  

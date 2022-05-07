@@ -4,6 +4,12 @@ locals {
     volume_type       = "gp2"
     volume_size       = "20"
   }
+
+  database_block_device = {
+    block_device_name = "/dev/sdc",
+    volume_type       = "gp2"
+    volume_size       = "100"
+  }
 }
 
 module "eks_cluster" {
@@ -46,6 +52,16 @@ module "eks_cluster" {
           "value"               = "owned"
         }
       ]
+    },
+    {
+      name                          = "analytics-db"
+      instance_type                 = "m5.large"
+      asg_min_size                  = 1
+      asg_desired_capacity          = 3
+      asg_max_size                  = 5
+      additional_ebs_volumes        = [local.database_block_device]
+      ami_id                        = "ami-01dd164a4205e1ba4"
+      kubelet_extra_args = "--node-labels=footel.com/role=analytics-db"
     }
   ]
 }
