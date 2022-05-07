@@ -1,0 +1,16 @@
+apiVersion: velero.io/v1
+kind: VolumeSnapshotLocation
+metadata:
+  name: aws-openebs 
+  namespace: velero
+spec:
+  config:
+    region: ap-south-1
+    bucket: velero-20220507111912151300000001
+    prefix: cstor
+    backupPathPrefix: daily-backups
+    provider: aws
+    restoreAllIncrementalSnapshots: "true"
+    autoSetTargetIP: "true"    
+  provider: openebs.io/cstor-blockstore
+
